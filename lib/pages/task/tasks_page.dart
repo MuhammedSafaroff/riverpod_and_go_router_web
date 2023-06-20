@@ -5,6 +5,7 @@ import 'package:riverpod_and_go_router_web/common/colors/app_colors.dart';
 
 import '../../model/task.dart';
 import '../../service/network_service.dart';
+import '../global/app_drawer.dart';
 import 'widgets/task_item.dart';
 import 'dart:html' as html;
 
@@ -17,8 +18,9 @@ class TasksPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(networkServiceProvider);
-    Future.delayed(const Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       ref.read(providerTaskId.notifier).state = pathId ?? "1";
+      ref.read(providerNavigationIndex.notifier).state = "tasks/1";
     });
     return data.when(
       data: (data) {
